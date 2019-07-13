@@ -24,62 +24,62 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.mitocode.exception.ModelNotFoundException;
-import com.mitocode.model.Paciente;
-import com.mitocode.service.IPacienteService;
+import com.mitocode.model.Especialidad;
+import com.mitocode.service.IEspecialidadService;
 
 
 @RestController
-@RequestMapping("/pacientes") // parte de la buena practica que solo se pueda acceder como /pacientes
-public class PacienteController {
+@RequestMapping("/especialidades") // parte de la buena practica que solo se pueda acceder como /pacientes
+public class EspecialidadController {
 	
 	@Autowired
-	private IPacienteService service;
+	private IEspecialidadService service;
 
 	@GetMapping
-	public ResponseEntity<List<Paciente>> listar(){
-		List<Paciente> lista = service.listar();
-		return new ResponseEntity<List<Paciente>>(lista, HttpStatus.OK);
+	public ResponseEntity<List<Especialidad>> listar(){
+		List<Especialidad> lista = service.listar();
+		return new ResponseEntity<List<Especialidad>>(lista, HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Paciente> leerPorId(@PathVariable ("id") Integer id) {
-		Paciente obj = service.leerPorId(id); 
+	public ResponseEntity<Especialidad> leerPorId(@PathVariable ("id") Integer id) {
+		Especialidad obj = service.leerPorId(id); 
 		if(obj == null) {
 			throw new ModelNotFoundException("ID NO ENCONTRADO " + id);
 		}
-		return new ResponseEntity<Paciente>(obj, HttpStatus.OK);		
+		return new ResponseEntity<Especialidad>(obj, HttpStatus.OK);		
 	}
 	
 	@GetMapping("/hateoas/{id}")
-	public Resource<Paciente> leerPorIdHateoas(@PathVariable ("id") Integer id) {
-		Paciente obj = service.leerPorId(id); 
+	public Resource<Especialidad> leerPorIdHateoas(@PathVariable ("id") Integer id) {
+		Especialidad obj = service.leerPorId(id); 
 		if(obj == null) {
 			throw new ModelNotFoundException("ID NO ENCONTRADO " + id);
 		}
 
-		Resource<Paciente> 	resource = new Resource<Paciente>(obj);
+		Resource<Especialidad> 	resource = new Resource<Especialidad>(obj);
 		
 		ControllerLinkBuilder linkTo = linkTo(methodOn(this.getClass()).leerPorId(id));
-		resource.add(linkTo.withRel("paciente-Resource"));
+		resource.add(linkTo.withRel("especialidad-Resource"));
 		return resource;
 	}
 	
 	@PostMapping
-	public ResponseEntity<Object> registar(@Valid @RequestBody Paciente pac) { //@RequestBody lee el json y lo representa en un objeto java
-		Paciente paciente = service.registrar(pac);
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(paciente.getIdPaciente()).toUri();
+	public ResponseEntity<Object> registar(@Valid @RequestBody Especialidad obj) { //@RequestBody lee el json y lo representa en un objeto java
+		Especialidad paciente = service.registrar(obj);
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(paciente.getIdEspecialidad()).toUri();
 		return ResponseEntity.created(location).build();
 	}
 	
 	@PutMapping
-	public ResponseEntity<Object> modificar(@Valid @RequestBody Paciente pac) {
-		service.modificar(pac);
+	public ResponseEntity<Object> modificar(@Valid @RequestBody Especialidad obj) {
+		service.modificar(obj);
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Object> eliminar(@PathVariable("id") Integer id) {
-		Paciente obj = service.leerPorId(id);
+		Especialidad obj = service.leerPorId(id);
 		if(obj == null) {
 			throw new ModelNotFoundException("ID NO ENCONTRADO " + id);
 		}else {

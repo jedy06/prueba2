@@ -1,40 +1,40 @@
 package com.mitocode.service.impl;
 
-import java.util.List;
+import java.util.List; 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mitocode.model.Paciente;
-import com.mitocode.repo.IPacienteRepo;
-import com.mitocode.service.IPacienteService;
+import com.mitocode.model.Especialidad;
+import com.mitocode.repo.IEspecialidadRepo;
+import com.mitocode.service.IEspecialidadService;
 
 @Service
-public class PacienteServiceImpl implements IPacienteService{
+public class EspecialidadServiceImpl implements IEspecialidadService{
 	
 	@Autowired
-	private IPacienteRepo repo;
+	private IEspecialidadRepo repo;
 
 	@Override
-	public Paciente registrar(Paciente pac) {
-		return repo.save(pac);
+	public Especialidad registrar(Especialidad obj) {
+		return repo.save(obj);
 		
 	}
 
 	@Override
-	public Paciente modificar(Paciente pac) {
+	public Especialidad modificar(Especialidad obj) {
 		// TODO Auto-generated method stub
-		return repo.save(pac);
+		return repo.save(obj);
 		
 	}
 
 	@Override
-	public List<Paciente> listar() {		
+	public List<Especialidad> listar() {		
 		return repo.findAll();  //Permite listar todos los registros
 	}
 
 	@Override
-	public Paciente leerPorId(Integer id) {
+	public Especialidad leerPorId(Integer id) {
 		return repo.findOne(id);  //Permite listar registros de a uno haciendo un select por Id
 	}
 

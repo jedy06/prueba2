@@ -5,36 +5,36 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mitocode.model.Paciente;
-import com.mitocode.repo.IPacienteRepo;
-import com.mitocode.service.IPacienteService;
+import com.mitocode.model.Medico;
+import com.mitocode.repo.IMedicoRepo;
+import com.mitocode.service.IMedicoService;
 
 @Service
-public class PacienteServiceImpl implements IPacienteService{
+public class MedicoServiceImpl implements IMedicoService{
 	
 	@Autowired
-	private IPacienteRepo repo;
+	private IMedicoRepo repo;
 
 	@Override
-	public Paciente registrar(Paciente pac) {
-		return repo.save(pac);
+	public Medico registrar(Medico obj) {
+		return repo.save(obj);
 		
 	}
 
 	@Override
-	public Paciente modificar(Paciente pac) {
+	public Medico modificar(Medico obj) {
 		// TODO Auto-generated method stub
-		return repo.save(pac);
+		return repo.save(obj);
 		
 	}
 
 	@Override
-	public List<Paciente> listar() {		
+	public List<Medico> listar() {		
 		return repo.findAll();  //Permite listar todos los registros
 	}
 
 	@Override
-	public Paciente leerPorId(Integer id) {
+	public Medico leerPorId(Integer id) {
 		return repo.findOne(id);  //Permite listar registros de a uno haciendo un select por Id
 	}
 
