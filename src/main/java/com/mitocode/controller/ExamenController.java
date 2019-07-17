@@ -65,15 +65,15 @@ public class ExamenController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Object> registar(@Valid @RequestBody Examen obj) { //@RequestBody lee el json y lo representa en un objeto java
-		Examen paciente = service.registrar(obj);
+	public ResponseEntity<Object> registar(@Valid @RequestBody Examen pac) { //@RequestBody lee el json y lo representa en un objeto java
+		Examen paciente = service.registrar(pac);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(paciente.getIdExamen()).toUri();
 		return ResponseEntity.created(location).build();
 	}
 	
 	@PutMapping
-	public ResponseEntity<Object> modificar(@Valid @RequestBody Examen obj) {
-		service.modificar(obj);
+	public ResponseEntity<Object> modificar(@Valid @RequestBody Examen pac) {
+		service.modificar(pac);
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 	

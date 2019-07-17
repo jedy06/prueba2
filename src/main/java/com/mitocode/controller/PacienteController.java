@@ -1,7 +1,6 @@
 package com.mitocode.controller;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+
 
 import java.net.URI;
 import java.util.List;
@@ -26,6 +25,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.mitocode.exception.ModelNotFoundException;
 import com.mitocode.model.Paciente;
 import com.mitocode.service.IPacienteService;
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 
 @RestController

@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.mitocode.model.Examen;
 
-public interface IExamenRepo extends JpaRepository<Examen, Integer> {
+public interface IExamenRepo extends JpaRepository<Examen, Integer>{
 
 }

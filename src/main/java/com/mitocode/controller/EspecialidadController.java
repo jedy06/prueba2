@@ -65,15 +65,15 @@ public class EspecialidadController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Object> registar(@Valid @RequestBody Especialidad obj) { //@RequestBody lee el json y lo representa en un objeto java
-		Especialidad paciente = service.registrar(obj);
+	public ResponseEntity<Object> registar(@Valid @RequestBody Especialidad pac) { //@RequestBody lee el json y lo representa en un objeto java
+		Especialidad paciente = service.registrar(pac);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(paciente.getIdEspecialidad()).toUri();
 		return ResponseEntity.created(location).build();
 	}
 	
 	@PutMapping
-	public ResponseEntity<Object> modificar(@Valid @RequestBody Especialidad obj) {
-		service.modificar(obj);
+	public ResponseEntity<Object> modificar(@Valid @RequestBody Especialidad pac) {
+		service.modificar(pac);
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 	
