@@ -9,6 +9,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 
+
 @Entity
 public class Paciente {
 	
@@ -24,11 +25,11 @@ public class Paciente {
 		@Column(name = "apellidos", nullable = false, length =70)
 		private String apellidos;
 		
-		@Size(min = 3, message = "nombre debe tener minimo 3 caracateres")
+		@Size(min = 3, message = "dni debe tener minimo 3 caracateres")
 		@Column(name = "dni", nullable = false, length =70)
 		private String dni;
 		
-		@Size(min = 8, max = 8, message = "dni debe tener 8 caracateres")
+		@Size(min = 8, message = "direccion debe tener 8 caracateres")
 		@Column(name = "direccion", nullable = false, length =150)
 		private String direccion;
 		

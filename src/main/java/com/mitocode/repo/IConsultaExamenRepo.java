@@ -2,6 +2,8 @@ package com.mitocode.repo;
 
 
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -13,7 +15,10 @@ import com.mitocode.model.ConsultaExamen;
 public interface IConsultaExamenRepo extends JpaRepository<ConsultaExamen, Integer>{
 	
 	//@Transactional
-	@Modifying
+	@Modifying // Se usa para indicar que la consulta no devuelve resultset es decir es un update o un insert
 	@Query(value = "INSERT INTO consulta_examen(id_consulta, id_examen) VALUES (:idConsulta, :idExamen)", nativeQuery = true)
 	Integer registrar(@Param("idConsulta") Integer idConsulta,@Param("idExamen") Integer idExamen);
+	
+	@Query("from ConsultaExamen ce WHERE ce.consulta.idConsulta = :idConsulta")
+	List<ConsultaExamen> listarExamenesPorConsulta(@Param("idConsulta") Integer idConsulta);
 }

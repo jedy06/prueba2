@@ -8,6 +8,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.HttpStatus;
@@ -39,6 +41,7 @@ public class PacienteController {
 
 	@GetMapping
 	public ResponseEntity<List<Paciente>> listar(){
+//		List<Paciente> lista = service.listar();
 		List<Paciente> lista = service.listar();
 		return new ResponseEntity<List<Paciente>>(lista, HttpStatus.OK);
 	}
@@ -50,6 +53,12 @@ public class PacienteController {
 			throw new ModelNotFoundException("ID NO ENCONTRADO " + id);
 		}
 		return new ResponseEntity<Paciente>(obj, HttpStatus.OK);		
+	}
+	
+	@GetMapping("/pageable")
+	public ResponseEntity<Page<Paciente>> listarPageable(Pageable pageable) {
+		Page<Paciente> pacientes = service.listarPageable(pageable);
+		return new ResponseEntity<Page<Paciente>>(pacientes, HttpStatus.OK);
 	}
 	
 	@GetMapping("/hateoas/{id}")
