@@ -45,7 +45,7 @@ public class Medico {
 	}
 
 	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
+		this.apellidos = apellidos;  
 	}
 
 	public String getCMP() {

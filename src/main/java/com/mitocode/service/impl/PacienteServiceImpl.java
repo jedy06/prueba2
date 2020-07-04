@@ -3,6 +3,8 @@ package com.mitocode.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.mitocode.model.Paciente;
@@ -16,21 +18,22 @@ public class PacienteServiceImpl implements IPacienteService{
 	private IPacienteRepo repo;
 
 	@Override
-	public void registrar(Paciente pac) {
-		repo.save(pac);
+	public Paciente registrar(Paciente pac) {
+		return repo.save(pac);
 		
 	}
 
 	@Override
-	public void modificar(Paciente pac) {
+	public Paciente modificar(Paciente pac) {
 		// TODO Auto-generated method stub
-		repo.save(pac);
+		return repo.save(pac);
 		
 	}
 
 	@Override
 	public List<Paciente> listar() {		
-		return repo.findAll();  //Permite listar todos los registros
+//		return repo.findAll();  //Permite listar todos los registros
+		return repo.findDescription();
 	}
 
 	@Override
@@ -42,6 +45,11 @@ public class PacienteServiceImpl implements IPacienteService{
 	public void eliminar(Integer id) {
 		repo.delete(id);
 		
+	}
+
+	@Override
+	public Page<Paciente> listarPageable(Pageable pageable) {		
+		return repo.findAll(pageable);
 	}
 
 }
